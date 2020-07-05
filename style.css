@@ -15,11 +15,29 @@ body {
   grid-template-columns: repeat(5, auto);
 }
 
+.reset {
+  font-size: 100px;
+  margin: auto;
+  padding: auto;
+  text-align: center;
+  cursor: pointer;
+}
+.score {
+  font-size: 100px;
+  margin: auto;
+  padding: auto;
+  text-align: center;
+  cursor: pointer;
+}
+.gone {
+}
+
 .card {
   background-color: darkslategray;
-  height: 250px;
-  width: 220px;
+  height: 175px;
+  width: 150px;
   font-size: 150px;
+  text-align: center;
   cursor: pointer;
 }
 

@@ -1,17 +1,16 @@
 //Game vars
-let numPairs = 0;
+let points = 0;
 let firstCard = -1;
-let secondCard = -1;
+const score = document.querySelector(".score");
 const cardDivs = document.querySelectorAll(".card");
-var numCards = Math.floor(cardDivs.length / 2);
+var numPairs = Math.floor(cardDivs.length / 2);
+
+//Initial array containing all the pairs of cards
 var cards = [];
-console.log(numCards);
-for (let i = 1; i <= numCards; i++) {
+for (let i = 1; i <= numPairs; i++) {
   cards.push(i);
   cards.push(i);
 }
-console.log(cards);
-
 //Helper functions
 const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -20,29 +19,47 @@ const shuffle = (array) => {
   }
 };
 
-shuffle(cards);
-console.log(cards);
-
+//Event handlers
 const handleCardClick = (e) => {
   console.log(e);
-  //firstCard =
-  //check card data
-  //if first card then -> store card data
-  //if second card compare data with first
-  //if card is a match then add points
+  // newBoard();
+  if (firstCard == -1) {
+    firstCard = e;
+    console.log(firstCard);
+  } else {
+    let secondCard = e;
+    if (
+      firstCard.target.id == secondCard.target.id &&
+      firstCard.target.id != ""
+    ) {
+      //Get rid of first and second card
+      firstCard.target.innerHTML = "";
+      firstCard.target.id = "";
+      secondCard.target.innerHTML = "";
+      secondCard.target.id = "";
+
+      points++;
+      score.innerHTML = `Score: ${points}`;
+    }
+    firstCard = -1;
+  }
 };
 
-//Event handler for each card
 for (cardDiv of cardDivs) {
   cardDiv.addEventListener("click", handleCardClick);
 }
 
-let index = 0;
-if (cardDivs.length == cards.length) {
-  for (cardDiv of cardDivs) {
-    cardDiv.id = cards[index];
-    cardDiv.innerHTML = cards[index];
-    index++;
-    // cardDiv.cla
+const newBoard = () => {
+  shuffle(cards);
+  //Assign id's to html elements
+  let index = 0;
+  if (cardDivs.length == cards.length) {
+    for (cardDiv of cardDivs) {
+      cardDiv.id = cards[index];
+      cardDiv.innerHTML = cards[index];
+      index++;
+    }
   }
-}
+};
+
+newBoard();
