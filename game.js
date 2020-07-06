@@ -3,7 +3,9 @@ let points = 0;
 let firstCard = -1;
 const score = document.querySelector(".score");
 const cardDivs = document.querySelectorAll(".card");
+const resetBtn = document.querySelector(".reset");
 let numPairs = Math.floor(cardDivs.length / 2);
+let maxPoints = numPairs;
 //Initial array containing all the pairs of cards
 let cards = [];
 
@@ -15,26 +17,37 @@ const shuffle = (array) => {
   }
 };
 
-const newBoard = () => {
-  shuffle(cards);
+const resetBoard = () => {
   //Assign id's to html elements
+  shuffle(cards);
   let index = 0;
   if (cardDivs.length == cards.length) {
     for (cardDiv of cardDivs) {
+      cardDiv.classList.remove("clicked");
       cardDiv.id = cards[index];
       cardDiv.innerHTML = cards[index];
       index++;
     }
   }
+  points = 0;
+  firstCard = -1;
+  score.innerHTML = `Score: ${points}`;
 };
 
 const handleFirstCard = (e) => {
-  firstCard = e;
-  //Add a class to prevent player from clicking same card
-  firstCard.target.classList.add("clicked");
+  console.log("On first card");
+  if (e.target.id == "") {
+    console.log("Cannot select empty card");
+    return;
+  } else {
+    //Add a class to prevent player from clicking same card
+    firstCard = e;
+    firstCard.target.classList.add("clicked");
+  }
 };
 
 const handleSecondCard = (e) => {
+  console.log("On second card");
   let secondCard = e;
   //Don't let player pick the same card
   if (secondCard.target.classList[1]) {
@@ -42,10 +55,7 @@ const handleSecondCard = (e) => {
     return;
   }
   //Check if cards match
-  if (
-    firstCard.target.id == secondCard.target.id &&
-    firstCard.target.id != ""
-  ) {
+  if (firstCard.target.id == secondCard.target.id) {
     //add class to second card
     secondCard.target.classList.add("clicked");
     //clear cards of their content
@@ -57,5 +67,10 @@ const handleSecondCard = (e) => {
     //Increase points on correct pair
     points++;
     score.innerHTML = `Score: ${points}`;
+    //Reset first pick
+    firstCard = -1;
+  } else {
+    firstCard.target.classList.remove("clicked");
+    firstCard = -1;
   }
 };

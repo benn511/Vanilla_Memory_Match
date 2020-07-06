@@ -8,23 +8,26 @@ const initSetup = () => {
   for (cardDiv of cardDivs) {
     cardDiv.addEventListener("click", handleCardClick);
   }
+  //Reset button event handler
+  resetBtn.addEventListener("click", resetBoard);
+
+  //Setup fresh board
+  resetBoard();
 };
 //Event handlers
 const handleCardClick = (e) => {
-  if (points < 10) {
-    //Play game
+  if (points < maxPoints) {
+    //Game is live
+    if (firstCard == -1) {
+      handleFirstCard(e);
+    } else {
+      handleSecondCard(e);
+      //Reset first pick
+      // firstCard = -1;
+    }
   } else {
-    console.log("Game is currently over! You win!");
-  }
-  // newBoard();
-  if (firstCard == -1) {
-    handleFirstCard(e);
-  } else {
-    handleSecondCard(e);
-    //Reset first pick
-    firstCard = -1;
+    //No more pairs are available
+    console.log("Congradulations on finding all pairs! You win!");
   }
 };
 initSetup();
-
-newBoard();
