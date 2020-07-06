@@ -40,6 +40,10 @@ body {
   text-align: center;
   cursor: pointer;
 }
+.card.clicked {
+  background-color: dodgerblue;
+  cursor: default;
+}
 
 @media only screen and (max-width: 1024px) {
   .container {
