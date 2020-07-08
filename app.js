@@ -1,3 +1,5 @@
+//adding new array cards picked.
+//Adding timer to handleSecondCard
 const initSetup = () => {
   //Push cards into array
   for (let i = 1; i <= numPairs; i++) {
@@ -18,12 +20,13 @@ const initSetup = () => {
 const handleCardClick = (e) => {
   if (points < maxPoints) {
     //Game is live
-    if (firstCard == -1) {
+    if (cardsPicked.length === 0) {
       handleFirstCard(e);
     } else {
       handleSecondCard(e);
-      //Reset first pick
-      // firstCard = -1;
+      setTimeout(() => {
+        console.log("Paused?");
+      }, 1000);
     }
   } else {
     //No more pairs are available

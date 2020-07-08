@@ -8,6 +8,7 @@ let numPairs = Math.floor(cardDivs.length / 2);
 let maxPoints = numPairs;
 //Initial array containing all the pairs of cards
 let cards = [];
+let cardsPicked = [];
 
 //Helper functions
 const shuffle = (array) => {
@@ -41,8 +42,10 @@ const handleFirstCard = (e) => {
     return;
   } else {
     //Add a class to prevent player from clicking same card
-    firstCard = e;
+    let firstCard = e;
     firstCard.target.classList.add("clicked");
+    cardsPicked.push(firstCard);
+    console.log("Pushed card", firstCard);
   }
 };
 
@@ -55,12 +58,12 @@ const handleSecondCard = (e) => {
     return;
   }
   //Check if cards match
-  if (firstCard.target.id == secondCard.target.id) {
+  if (cardsPicked[0].target.id == secondCard.target.id) {
     //add class to second card
     secondCard.target.classList.add("clicked");
     //clear cards of their content
-    firstCard.target.innerHTML = "";
-    firstCard.target.id = "";
+    cardsPicked[0].target.innerHTML = "";
+    cardsPicked[0].target.id = "";
     secondCard.target.innerHTML = "";
     secondCard.target.id = "";
 
@@ -68,9 +71,9 @@ const handleSecondCard = (e) => {
     points++;
     score.innerHTML = `Score: ${points}`;
     //Reset first pick
-    firstCard = -1;
+    cardsPicked.pop();
   } else {
-    firstCard.target.classList.remove("clicked");
-    firstCard = -1;
+    cardsPicked[0].target.classList.remove("clicked");
+    cardsPicked.pop();
   }
 };
