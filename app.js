@@ -1,5 +1,7 @@
-//adding new array cards picked.
-//Adding timer to handleSecondCard
+//Hide frontend cards
+//Display both cards picked for about a second before resetting
+//Set up win message
+
 const initSetup = () => {
   //Push cards into array
   for (let i = 1; i <= numPairs; i++) {
@@ -30,7 +32,7 @@ const handleCardClick = (e) => {
     }
   } else {
     //No more pairs are available
-    console.log("Congradulations on finding all pairs! You win!");
+    console.log("Congratulations on finding all pairs! You win!");
   }
 };
 initSetup();

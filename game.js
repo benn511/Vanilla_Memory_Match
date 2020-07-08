@@ -26,7 +26,7 @@ const resetBoard = () => {
     for (cardDiv of cardDivs) {
       cardDiv.classList.remove("clicked");
       cardDiv.id = cards[index];
-      cardDiv.innerHTML = cards[index];
+      // cardDiv.innerHTML = cards[index];
       index++;
     }
   }
@@ -44,6 +44,7 @@ const handleFirstCard = (e) => {
     //Add a class to prevent player from clicking same card
     let firstCard = e;
     firstCard.target.classList.add("clicked");
+    firstCard.target.innerHTML = firstCard.target.id;
     cardsPicked.push(firstCard);
     console.log("Pushed card", firstCard);
   }
