@@ -34,12 +34,13 @@ const resetBoard = () => {
     for (cardDiv of cardDivs) {
       cardDiv.classList.remove("clicked");
       cardDiv.id = cards[index];
+      cardDiv.innerHTML = "";
       // cardDiv.innerHTML = cards[index];
       index++;
     }
   }
   points = 0;
-  firstCard = -1;
+  cardsPicked = [];
   score.innerHTML = `Score: ${points}`;
 };
 

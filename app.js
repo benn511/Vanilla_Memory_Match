@@ -35,7 +35,7 @@ const handleCardClick = (e) => {
           cardsPicked[1].id = "";
           cardsPicked.pop();
           cardsPicked.pop();
-        }, 1000);
+        }, 500);
       } else {
         setTimeout(() => {
           console.log("Incorrect guess take a glimpse!");
@@ -45,7 +45,7 @@ const handleCardClick = (e) => {
           cardsPicked[1].innerHTML = "";
           cardsPicked.pop();
           cardsPicked.pop();
-        }, 2000);
+        }, 1000);
       }
     }
   } else {
