@@ -26,9 +26,27 @@ const handleCardClick = (e) => {
       handleFirstCard(e);
     } else {
       handleSecondCard(e);
-      setTimeout(() => {
-        console.log("Paused?");
-      }, 1000);
+      //on wrong pair show glimpse but reset content and remove class
+      if (isMatch()) {
+        setTimeout(() => {
+          //Cards matched. Remove from game
+          console.log("Short pause since correct.");
+          cardsPicked[0].id = "";
+          cardsPicked[1].id = "";
+          cardsPicked.pop();
+          cardsPicked.pop();
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          console.log("Incorrect guess take a glimpse!");
+          cardsPicked[0].classList.remove("clicked");
+          cardsPicked[1].classList.remove("clicked");
+          cardsPicked[0].innerHTML = "";
+          cardsPicked[1].innerHTML = "";
+          cardsPicked.pop();
+          cardsPicked.pop();
+        }, 2000);
+      }
     }
   } else {
     //No more pairs are available
