@@ -30,6 +30,32 @@ const isMatch = () => {
   }
 };
 
+const rmPair = () => {
+  //Cards matched. Remove from game
+  console.log("Short pause since correct.");
+  //Remove id
+  cardsPicked[0].id = "";
+  cardsPicked[1].id = "";
+  //Clear content
+  cardsPicked[0].innerHTML = "";
+  cardsPicked[1].innerHTML = "";
+};
+
+const unflipPair = () => {
+  //Clear content
+  cardsPicked[0].innerHTML = "";
+  cardsPicked[1].innerHTML = "";
+  //Remove class of clicked
+  cardsPicked[0].classList.remove("clicked");
+  cardsPicked[1].classList.remove("clicked");
+};
+
+const clearCardsPicked = () => {
+  while (cardsPicked.length > 0) {
+    cardsPicked.pop();
+  }
+};
+
 const resetBoard = () => {
   //Assign id's to html elements
   shuffle(cards);
@@ -49,18 +75,13 @@ const resetBoard = () => {
 };
 
 const handleFirstCard = (e) => {
-  console.log("Picked first card");
-  if (e.target.id == "") {
-    console.log("Cannot select empty card");
-    return;
-  } else {
-    //Change card background and show contents
-    let firstCard = e.target;
-    firstCard.classList.add("clicked");
-    firstCard.innerHTML = firstCard.id;
-    cardsPicked.push(firstCard);
-    console.log("Pushed card", firstCard);
-  }
+  console.log("Picking first card!");
+  //Change card background and show contents
+  let firstCard = e.target;
+  firstCard.classList.add("clicked");
+  firstCard.innerHTML = firstCard.id;
+  cardsPicked.push(firstCard);
+  console.log("Pushed card", firstCard);
 };
 
 const handleSecondCard = (e) => {

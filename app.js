@@ -27,34 +27,29 @@ const handleCardClick = (e) => {
       console.log("Can't pick null card!");
       return;
     }
+
     if (cardsPicked.length === 0) {
       handleFirstCard(e);
+    } else if (cardsPicked.length === 1) {
+      handleSecondCard(e);
+    } else if (cardsPicked.length === 2) {
+      if (isMatch()) {
+        //Remove cards from board
+        rmPair();
+      } else {
+        //Flip cards back over
+        flipPair();
+      }
+
+      //Clear stack regardless of right or wrong pair
+      cardsPicked.pop();
+      cardsPicked.pop();
     } else {
-      if (isMatch()) {
-      } else {
-        handleSecondCard(e);
-      }
-      //on wrong pair show glimpse but reset content and remove class
-      if (isMatch()) {
-        setTimeout(() => {
-          //Cards matched. Remove from game
-          console.log("Short pause since correct.");
-          cardsPicked[0].id = "";
-          cardsPicked[1].id = "";
-          cardsPicked.pop();
-          cardsPicked.pop();
-        }, 500);
-      } else {
-        setTimeout(() => {
-          console.log("Incorrect guess take a glimpse!");
-          cardsPicked[0].classList.remove("clicked");
-          cardsPicked[1].classList.remove("clicked");
-          cardsPicked[0].innerHTML = "";
-          cardsPicked[1].innerHTML = "";
-          cardsPicked.pop();
-          cardsPicked.pop();
-        }, 1000);
-      }
+      console.log(
+        "Game glitched! Cards picked over or underflowed",
+        "Cards picked length: ",
+        cardsPicked
+      );
     }
   } else {
     //No more pairs are available
