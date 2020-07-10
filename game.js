@@ -32,7 +32,7 @@ const isMatch = () => {
 
 const rmPair = () => {
   //Cards matched. Remove from game
-  console.log("Short pause since correct.");
+  console.log("Correct guess!.");
   //Remove id
   cardsPicked[0].id = "";
   cardsPicked[1].id = "";
@@ -41,7 +41,7 @@ const rmPair = () => {
   cardsPicked[1].innerHTML = "";
 };
 
-const unflipPair = () => {
+const flipPair = () => {
   //Clear content
   cardsPicked[0].innerHTML = "";
   cardsPicked[1].innerHTML = "";
@@ -93,11 +93,6 @@ const handleSecondCard = (e) => {
     return;
   } else {
     cardsPicked.push(secondCard);
-  }
-  //Check if cards match
-  if (isMatch()) {
-    points++;
-    score.innerHTML = `Score: ${points}`;
   }
   //Change card background
   cardsPicked[1].classList.add("clicked");

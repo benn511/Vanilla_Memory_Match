@@ -1,6 +1,3 @@
-//Remove timer functions because of bugs.
-//Add a initial check to see if cards are currently selected to show cards picked until player picks next card.
-
 const initSetup = () => {
   //Push cards into array
   for (let i = 1; i <= numPairs; i++) {
@@ -23,7 +20,7 @@ const handleCardClick = (e) => {
     //Game is live
 
     //Don't allow user to pick empty card
-    if (e.target.id == "") {
+    if (e.target.id == "" && cardsPicked.length !== 2) {
       console.log("Can't pick null card!");
       return;
     }
@@ -34,6 +31,9 @@ const handleCardClick = (e) => {
       handleSecondCard(e);
     } else if (cardsPicked.length === 2) {
       if (isMatch()) {
+        //Update score
+        points++;
+        score.innerHTML = `Score: ${points}`;
         //Remove cards from board
         rmPair();
       } else {
