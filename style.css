@@ -29,7 +29,8 @@ body {
   text-align: center;
   cursor: pointer;
 }
-.gone {
+.win::after {
+  content: "Congratulations on finding all pairs!";
 }
 
 .card {

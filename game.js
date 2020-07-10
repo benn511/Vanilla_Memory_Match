@@ -4,6 +4,7 @@ let firstCard = -1;
 const score = document.querySelector(".score");
 const cardDivs = document.querySelectorAll(".card");
 const resetBtn = document.querySelector(".reset");
+const message = document.querySelector(".message");
 let numPairs = Math.floor(cardDivs.length / 2);
 let maxPoints = numPairs;
 //Initial array containing all the pairs of cards
@@ -36,9 +37,6 @@ const rmPair = () => {
   //Remove id
   cardsPicked[0].id = "";
   cardsPicked[1].id = "";
-  //Clear content
-  cardsPicked[0].innerHTML = "";
-  cardsPicked[1].innerHTML = "";
 };
 
 const flipPair = () => {
