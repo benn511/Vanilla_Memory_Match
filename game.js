@@ -19,10 +19,14 @@ const shuffle = (array) => {
 };
 
 const isMatch = () => {
-  if (cardsPicked[0].id == cardsPicked[1].id) {
-    return true;
-  } else {
+  if (cardsPicked.length < 2) {
     return false;
+  } else {
+    if (cardsPicked[0].id == cardsPicked[1].id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 };
 

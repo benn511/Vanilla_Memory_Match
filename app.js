@@ -1,6 +1,5 @@
-//Hide frontend cards
-//Display both cards picked for about a second before resetting
-//Set up win message
+//Remove timer functions because of bugs.
+//Add a initial check to see if cards are currently selected to show cards picked until player picks next card.
 
 const initSetup = () => {
   //Push cards into array
@@ -22,10 +21,19 @@ const initSetup = () => {
 const handleCardClick = (e) => {
   if (points < maxPoints) {
     //Game is live
+
+    //Don't allow user to pick empty card
+    if (e.target.id == "") {
+      console.log("Can't pick null card!");
+      return;
+    }
     if (cardsPicked.length === 0) {
       handleFirstCard(e);
     } else {
-      handleSecondCard(e);
+      if (isMatch()) {
+      } else {
+        handleSecondCard(e);
+      }
       //on wrong pair show glimpse but reset content and remove class
       if (isMatch()) {
         setTimeout(() => {
