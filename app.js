@@ -9,10 +9,10 @@ const initSetup = () => {
     cardDiv.addEventListener("click", handleCardClick);
   }
   //Reset button event handler
-  resetBtn.addEventListener("click", resetBoard);
+  resetBtn.addEventListener("click", resetGame);
 
   //Setup fresh board
-  resetBoard();
+  resetGame();
 };
 //Event handlers
 const handleCardClick = (e) => {
@@ -54,7 +54,7 @@ const handleCardClick = (e) => {
   } else {
     //No more pairs are available
     console.log("Congratulations on finding all pairs! You win!");
-    message.classList.add(".win");
+    message.classList.add("win");
   }
 };
 initSetup();

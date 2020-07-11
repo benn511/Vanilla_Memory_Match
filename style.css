@@ -30,7 +30,9 @@ body {
   cursor: pointer;
 }
 .win::after {
-  content: "Congratulations on finding all pairs!";
+  font-size: 75px;
+  text-align: center;
+  content: "Congratulations on finding all!";
 }
 
 .card {

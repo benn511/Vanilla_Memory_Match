@@ -54,7 +54,7 @@ const clearCardsPicked = () => {
   }
 };
 
-const resetBoard = () => {
+const resetGame = () => {
   //Assign id's to html elements
   shuffle(cards);
   let index = 0;
@@ -70,6 +70,7 @@ const resetBoard = () => {
   points = 0;
   cardsPicked = [];
   score.innerHTML = `Score: ${points}`;
+  message.classList.remove("win");
 };
 
 const handleFirstCard = (e) => {
