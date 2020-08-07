@@ -1,10 +1,11 @@
-//Game vars
-let points = 0;
-let firstCard = -1;
+//Page vars
 const score = document.querySelector(".score");
 const cardDivs = document.querySelectorAll(".card");
 const resetBtn = document.querySelector(".reset");
 const message = document.querySelector(".message");
+//Game vars
+let points = 0;
+let firstCard = -1;
 let numPairs = Math.floor(cardDivs.length / 2);
 let maxPoints = numPairs;
 //Initial array containing all the pairs of cards
