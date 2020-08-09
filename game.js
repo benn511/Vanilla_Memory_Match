@@ -19,12 +19,10 @@ class Memory {
       "fa-hamburger",
     ];
     this.cards = [];
-    this.points = 0;
-    this.firstCard = -1;
     this.numPairs = 0;
     this.maxPoints = 10;
     this.cardsPicked = [];
-    this.clicks = 0;
+    // this.clicks = 0;
   }
   init() {
     //Add two cards for each icon
@@ -54,6 +52,7 @@ class Memory {
         console.log("Please choose a different card");
         return;
       } else {
+        console.log("Nice pick");
         card.classList.add("clicked");
         this.cardsPicked.push(card);
       }
@@ -63,19 +62,28 @@ class Memory {
   }
 
   checkMatch() {
+    if (this.isMatch()) {
+      //Increase points
+      //Don't remove .clicked
+      this.numPairs++;
+      //unflip cards
+    } else if (this.cardsPicked.length > 2 || this.cardsPicked.length < 0) {
+      console.error("Card underflow/overflow. Check logic");
+    } else {
+      console.log("Not enough cards picked yet");
+    }
+  }
+
+  isMatch() {
     if (this.cardsPicked.length == 2) {
       //Check for match
       let icon1 = cardsPicked[0].firstElementChild[1];
       let icon2 = cardsPicked[1].firstElementChild[1];
       if (icon1 == icon2) {
-        //Increase points
-        this.numPairs++;
-        //Make cards unplayable now
-      } else {
-        //unflip cards
+        return true;
       }
     } else {
-      return;
+      return false;
     }
   }
 

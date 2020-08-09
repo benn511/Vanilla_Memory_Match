@@ -8,9 +8,13 @@ body {
   grid-auto-rows: 100px;
   gap: 25px;
 }
+
+/* Card styles */
+
 .hidden {
   color: #3498db;
 }
+
 .grid-item {
   cursor: pointer;
   min-height: 100px;
@@ -22,15 +26,23 @@ body {
   align-items: center;
   font-size: 4rem;
 }
-/* .grid-item:nth-child(even) {
-  background-color: dodgerblue;
-}
-.grid-item:nth-child(odd) {
+.clicked {
   background-color: #333;
+  cursor: not-allowed;
+  color: black;
+}
+/* .clicked::after {
+  content: "fa-question-circle";
 } */
+
 .grid-item:hover {
   border: #f1c40f solid 3px;
 }
+
+.clicked:hover {
+  border: 3px solid #34495e;
+}
+
 @media only screen and (max-width: 767px) {
   .grid-container {
     grid-template-columns: repeat(4, 100px);
