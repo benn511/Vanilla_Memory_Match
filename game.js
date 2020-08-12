@@ -21,7 +21,7 @@ class Memory {
     ];
     this.cards = [];
     this.numPairs = 0;
-    this.numFlips = 0;
+    this.numFlips = -1;
     this.maxPoints = 10;
     this.cardsPicked = [];
     // this.clicks = 0;
@@ -61,6 +61,22 @@ class Memory {
 
   //-------------Game methods--------------
 
+  firstFlip() {
+    if (this.numFlips == -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  hideAllCards() {
+    //Remove icons from every item
+    for (let i = 0; i < this.htmlIcons.length; i++) {
+      this.htmlIcons[i].classList.remove(this.cards[i]);
+      this.htmlIcons[i].classList.add(this.defaultIcon);
+    }
+  }
+
   handleCard(card) {
     if (card) {
       if (
@@ -70,6 +86,7 @@ class Memory {
         console.log("Please choose a different card");
         return;
       } else {
+        this.numFlips++;
         console.log("Nice pick");
         card.classList.add("clicked");
         this.cardsPicked.push(card);
@@ -113,7 +130,6 @@ class Memory {
 
   revertCardsPicked() {
     if (this.cardsPicked.length == 2) {
-      this.numFlips++;
       if (this.cardsPicked[0].classList.contains("done")) {
         this.cardsPicked.pop();
         this.cardsPicked.pop();
@@ -165,7 +181,7 @@ class Memory {
   }
 
   resetGame() {
-    this.numFlips = 0;
+    this.numFlips = -1;
     this.numPairs = 0;
   }
 

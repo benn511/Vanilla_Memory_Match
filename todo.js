@@ -1,5 +1,6 @@
-//Event delegation and get rid of other event handlers
+//Event delegation and get rid of other event handlers - done
+//Check what target was selected
 
-//Cards need to stay flipped over
+//need to target check because of event delegation
 
-//fix error with cards not staying selected
+//Need to setup game to show all cards at beginning for quick glimpse before starting game - done

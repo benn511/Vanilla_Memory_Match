@@ -4,17 +4,18 @@ let game = new Memory();
 game.init();
 
 //Grab all game cards
-htmlGridItems = document.querySelectorAll(".grid-item");
-
-//Find the font awesome class from the event
-// e.currentTarget.firstElementChild.classList[1]
-
-//Main Game event handler
-for (gridItem of htmlGridItems) {
-  gridItem.addEventListener("click", (e) => {
+htmlGrid = document.querySelector(".grid-container");
+htmlGrid.addEventListener("click", (e) => {
+  if (game.firstFlip()) {
+    game.hideAllCards();
+    game.numFlips++;
+  } else {
     game.revertCardsPicked();
     game.handleCard(e.currentTarget);
     game.checkMatch();
     game.updateHtml();
-  });
-}
+  }
+});
+
+//Find the font awesome class from the event
+// e.currentTarget.firstElementChild.classList[1]
