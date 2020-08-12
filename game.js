@@ -77,6 +77,25 @@ class Memory {
     }
   }
 
+  isValidTarget(target) {
+    if (target.classList.contains("grid-item")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getTarget(e) {
+    let target = e.target;
+    if (target.classList.contains("grid-item")) {
+      return target;
+    } else if (target.classList.contains("grid-container")) {
+      return target;
+    } else if (target.classList.contains("fas")) {
+      return target.parentElement;
+    }
+  }
+
   handleCard(card) {
     if (card) {
       if (

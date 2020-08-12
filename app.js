@@ -6,14 +6,17 @@ game.init();
 //Grab all game cards
 htmlGrid = document.querySelector(".grid-container");
 htmlGrid.addEventListener("click", (e) => {
-  if (game.firstFlip()) {
-    game.hideAllCards();
-    game.numFlips++;
-  } else {
-    game.revertCardsPicked();
-    game.handleCard(e.currentTarget);
-    game.checkMatch();
-    game.updateHtml();
+  let target = game.getTarget(e);
+  if (game.isValidTarget(target)) {
+    if (game.firstFlip()) {
+      game.hideAllCards();
+      game.numFlips++;
+    } else {
+      game.revertCardsPicked();
+      game.handleCard(target);
+      game.checkMatch();
+      game.updateHtml();
+    }
   }
 });
 
