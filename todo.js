@@ -1,1 +1,3 @@
-//need to target check because of event delegation
+//Game over check
+
+//Reset game button

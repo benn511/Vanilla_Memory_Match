@@ -6,9 +6,11 @@ game.init();
 //Grab all game cards
 htmlGrid = document.querySelector(".grid-container");
 htmlGrid.addEventListener("click", (e) => {
+  console.log("Click event");
   let target = game.getTarget(e);
   if (game.isValidTarget(target)) {
     if (game.firstFlip()) {
+      console.log("Games first click");
       game.hideAllCards();
       game.numFlips++;
     } else {
@@ -19,6 +21,3 @@ htmlGrid.addEventListener("click", (e) => {
     }
   }
 });
-
-//Find the font awesome class from the event
-// e.currentTarget.firstElementChild.classList[1]

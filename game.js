@@ -7,6 +7,7 @@ class Memory {
     this.htmlIcons = document.querySelectorAll(".fas");
     this.htmlGridItems = document.querySelectorAll(".grid-item");
     this.defaultIcon = "fa-question-circle";
+    this.resetBtn = document.querySelector("#reset");
     this.icons = [
       "fa-bomb",
       "fa-anchor",
@@ -24,7 +25,6 @@ class Memory {
     this.numFlips = -1;
     this.maxPoints = 10;
     this.cardsPicked = [];
-    // this.clicks = 0;
   }
 
   //Setup card stack, assign ids, shuffle cards
@@ -36,19 +36,14 @@ class Memory {
     });
 
     this.shuffleCards();
+    this.addFAIcons();
 
-    //Add FA classes
-    for (let i = 0; i < this.cards.length; i++) {
-      this.htmlIcons[i].classList.add(this.cards[i]);
-      // this.htmlIcons[i].classList.add("fa-question-circle");
-    }
+    //setup reset button
+    this.resetBtn.addEventListener("click", () => {
+      this.resetGame();
+    });
 
-    //Add an id to each grid-item to identify its class
-    let id = 0;
-    for (const gridItem of this.htmlGridItems) {
-      gridItem.id = id;
-      id++;
-    }
+    this.updateHtml();
   }
 
   //---------Helper methods-----------
@@ -199,14 +194,45 @@ class Memory {
     }
   }
 
+  isCardsHidden() {
+    if (this.htmlIcons[0].classList.contains(this.defaultIcon)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   resetGame() {
+    console.log("Resetting game");
+    this.shuffleCards();
+    //remove extra css classes from elements
+    for (const item of this.htmlGridItems) {
+      item.classList.remove("clicked");
+    }
+
+    //Game might be hidden still so we need to reveal
+    if (this.isCardsHidden()) {
+      console.log("Removing def icon");
+      this.rmDefaultIcons();
+      this.addFAIcons();
+    }
+
+    //reset vars
     this.numFlips = -1;
     this.numPairs = 0;
+    this.cardsPicked = [];
+
+    //reset html
+    this.updateHtml();
   }
 
   //--------------Html updaters----------------
   setHtmlFlips() {
-    this.htmlFlips.innerHTML = `Flips: ${this.numFlips}`;
+    if (this.numFlips >= 0) {
+      this.htmlFlips.innerHTML = `Flips: ${this.numFlips}`;
+    } else {
+      this.htmlFlips.innerHTML = `Flips: ${0}`;
+    }
   }
   setHtmlPairs() {
     this.htmlPairs.innerHTML = `Score: ${this.numPairs}`;
@@ -216,6 +242,37 @@ class Memory {
     this.setHtmlPairs();
     if (this.gameOver()) {
       alert("Game over!");
+    }
+  }
+
+  rmDefaultIcons() {
+    for (const icon of this.htmlIcons) {
+      icon.classList.remove(this.defaultIcon);
+    }
+  }
+  addDefaultIcons() {
+    for (const icon of this.htmlIcons) {
+      icon.classList.add(this.defaultIcon);
+    }
+  }
+  addFAIcons() {
+    if (this.cards.length > 0) {
+      //Add FA classes
+      for (let i = 0; i < this.cards.length; i++) {
+        this.htmlIcons[i].classList.add(this.cards[i]);
+      }
+    } else {
+      console.error("No cards in array to add FA icons with!");
+    }
+  }
+  rmFAIcons() {
+    if (this.cards.length > 0) {
+      //Add FA classes
+      for (let i = 0; i < this.cards.length; i++) {
+        this.htmlIcons[i].classList.remove(this.cards[i]);
+      }
+    } else {
+      console.error("No cards in array to rm FA icons with!");
     }
   }
 }
