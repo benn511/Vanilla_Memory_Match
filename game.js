@@ -35,15 +35,22 @@ class Memory {
       this.cards.push(icon);
     });
 
+    //Setup frontend
     this.shuffleCards();
     this.addFAIcons();
+    this.updateHtml();
+
+    //Add an id to each grid-item to identify its class
+    let id = 0;
+    for (const gridItem of this.htmlGridItems) {
+      gridItem.id = id;
+      id++;
+    }
 
     //setup reset button
     this.resetBtn.addEventListener("click", () => {
       this.resetGame();
     });
-
-    this.updateHtml();
   }
 
   //---------Helper methods-----------
@@ -114,22 +121,12 @@ class Memory {
   checkMatch() {
     if (this.cardsPicked.length > 2 || this.cardsPicked.length < 0) {
       console.error("Card underflow/overflow. Check logic");
-    } else if (this.cardsPicked.length == 1) {
-      console.log("Not at two cards yet. Didn't compare");
-      return;
-    } else {
-      console.log("Comparing...");
-    }
-
-    if (this.isMatch()) {
-      console.log("Found a match");
-      //Increase points
-      this.numPairs++;
-      //Add a class to know not to select card again
-      this.cardsPicked[0].classList.add("done");
-      this.cardsPicked[1].classList.add("done");
-    } else {
-      console.log("No match!");
+    } else if (this.cardsPicked.length == 2) {
+      if (this.isMatch()) {
+        this.numPairs++;
+        this.cardsPicked.pop();
+        this.cardsPicked.pop();
+      }
     }
   }
 
@@ -165,9 +162,6 @@ class Memory {
         this.cardsPicked.pop();
         this.cardsPicked.pop();
       }
-    } else {
-      console.log("Cannot revert less than two cards...");
-      return;
     }
   }
 
@@ -203,27 +197,23 @@ class Memory {
   }
 
   resetGame() {
-    console.log("Resetting game");
-    this.shuffleCards();
     //remove extra css classes from elements
     for (const item of this.htmlGridItems) {
       item.classList.remove("clicked");
     }
 
-    //Game might be hidden still so we need to reveal
-    if (this.isCardsHidden()) {
-      console.log("Removing def icon");
-      this.rmDefaultIcons();
-      this.addFAIcons();
-    }
+    //Replace old FA icons with updated list
+    this.rmFAIcons();
+    this.rmDefaultIcons();
+    this.shuffleCards();
+    this.addFAIcons();
 
-    //reset vars
+    //reset game vars
     this.numFlips = -1;
     this.numPairs = 0;
     this.cardsPicked = [];
 
-    //reset html
-    this.updateHtml();
+    this.updateHtml(); //Front-end
   }
 
   //--------------Html updaters----------------
@@ -259,7 +249,8 @@ class Memory {
     if (this.cards.length > 0) {
       //Add FA classes
       for (let i = 0; i < this.cards.length; i++) {
-        this.htmlIcons[i].classList.add(this.cards[i]);
+        //+1 to skip first icon used in stats
+        this.htmlIcons[i + 1].classList.add(this.cards[i]);
       }
     } else {
       console.error("No cards in array to add FA icons with!");
@@ -269,7 +260,8 @@ class Memory {
     if (this.cards.length > 0) {
       //Add FA classes
       for (let i = 0; i < this.cards.length; i++) {
-        this.htmlIcons[i].classList.remove(this.cards[i]);
+        //+1 to skip first icon used in stats
+        this.htmlIcons[i + 1].classList.remove(this.cards[i]);
       }
     } else {
       console.error("No cards in array to rm FA icons with!");

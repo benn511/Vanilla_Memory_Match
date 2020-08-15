@@ -9,6 +9,23 @@ body {
   gap: 25px;
 }
 
+/* Game-Text */
+.game-text {
+  color: #2196f3;
+  font-size: 4rem;
+}
+#reset {
+  cursor: pointer;
+}
+.redo {
+  font-size: 3rem;
+}
+.stats {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 /* Card styles */
 
 .hidden {
