@@ -1,6 +1,5 @@
 let game = new Memory();
 //Setup init vars of the game
-//&&Need to allow a glimpse to the player at beginning of game to give a chance at winning
 game.init();
 
 //Grab all game cards
