@@ -188,14 +188,6 @@ class Memory {
     }
   }
 
-  isCardsHidden() {
-    if (this.htmlIcons[0].classList.contains(this.defaultIcon)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   resetGame() {
     //remove extra css classes from elements
     for (const item of this.htmlGridItems) {
