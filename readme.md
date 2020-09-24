@@ -1,17 +1,5 @@
 # Vanilla JS Memory Match game
 
-## Front-end
+Displays icons to user. After initial click all icons are hidden. Goal of game is to find all pairs with the least amount of clicks.
 
-HTML card classes are given ID's to represent unique cards.
-![Image](cardids.png "Id's assigned to the different cards")
-
-A class of 'clicked' is given to any card selected by the player.
-
-Once a card has been 'clicked' is color changes and content becomes its ID.
-![Image](clicked.png ".clicked assigned to a card")
-
-## Project Showcase
-
-An array is used as a stack to push or pop cards that are selected.
-
-Project primarily focuses on DOM to select elements on the page and to modify different values.
+![alt text](./images/gameplay.gif "Gameplay")
